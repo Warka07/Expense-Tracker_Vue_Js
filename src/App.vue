@@ -4,7 +4,10 @@
     <div class="container">
       <Balance :total="total" />
       <IncomeExpenses :income="+income" :expenses="+expenses" />
-      <TransactionList :transactions="transactions" />
+      <TransactionList
+        :transactions="transactions"
+        @transactionDeleted="handleTransactionDeleted"
+      />
       <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
     </div>
   </div>
@@ -17,7 +20,18 @@ import IncomeExpenses from "./components/IncomeExpenses.vue";
 import TransactionList from "./components/TransactionList.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 
-import { ref, computed } from "vue";
+import { useToast } from "vue-toastification";
+
+import { ref, computed, onMounted } from "vue";
+
+const toast = useToast();
+
+onMounted(() => {
+  const savedTransactions = JSON.parse(localStorage.getItem("transactions"));
+  if (savedTransactions) {
+    transactions.value = savedTransactions;
+  }
+});
 
 const transactions = ref([
   { id: 1, text: "Flower", amount: -19.99 },
@@ -60,11 +74,33 @@ const handleTransactionSubmitted = (transactionData) => {
     text: transactionData.text,
     amount: transactionData.amount,
   });
-  console.log(generatedUniqueId());
+  saveTransactionsToLocalStorage();
+
+  // console.log(generatedUniqueId());
+  toast.success("Transaction added");
 };
 
 //  generatedUniqueId
 const generatedUniqueId = () => {
   return Math.floor(Math.random() * 100000);
+};
+
+// Delete Transaction
+
+const handleTransactionDeleted = (id) => {
+  // console.log(id);
+  transactions.value = transactions.value.filter(
+    (transaction) => transaction.id !== id
+  );
+
+  saveTransactionsToLocalStorage();
+
+  toast.success("Transaction deleted");
+};
+
+// Save to localstorage
+
+const saveTransactionsToLocalStorage = () => {
+  localStorage.setItem("transactions", JSON.stringify(transactions.value));
 };
 </script>
