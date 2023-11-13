@@ -15,7 +15,7 @@
         <label for="amount"
           >Amount <br />
 
-          (negative - expense, positive = income)
+          (negative - expense, positive - income)
         </label>
         <input
           type="text"

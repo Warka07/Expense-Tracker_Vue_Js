@@ -28,21 +28,32 @@ body {
 h1 {
   letter-spacing: 1px;
   margin: 0;
+  justify-content: center;
+  display: flex;
 }
-
+h2 {
+  /*  */
+  justify-content: center;
+  display: flex;
+}
 h3 {
+  justify-content: center;
+  display: flex;
   border-bottom: 1px solid #bbb;
   padding-bottom: 10px;
   margin: 40px 0 10px;
 }
 
 h4 {
+  justify-content: center;
+  display: flex;
   margin: 0;
   text-transform: uppercase;
 }
 
 .inc-exp-container {
-  background-color: #fff;
+  /* background-color: #fff; */
+  background: #9f8ded;
   box-shadow: var(--box-shadow);
   padding: 20px;
   display: flex;
@@ -66,7 +77,8 @@ h4 {
 }
 
 .money.plus {
-  color: #2ecc71;
+  color: #fff;
+  /* #2ecc71; */
   font-weight: bold;
 }
 
@@ -115,7 +127,8 @@ input[type="number"] {
 }
 
 .list li {
-  background-color: #fff;
+  background-color: #d7d1e7;
+  /* #fff; */
   box-shadow: var(--box-shadow);
   color: #333;
   display: flex;
